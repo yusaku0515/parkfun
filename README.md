@@ -17,6 +17,21 @@
 ### 主な利用シーン
 行きたい公園について調べたい時に利用してもらう
 
+## 使用言語
+・サーバサイド
+  ・言語：Ruby
+  ・フレームワーク：Ruby On Rails
+  ・Gem：devise
+・フロントエンド
+  ・CSSフレームワーク：BootStrap
+  ・JavaScriptライブラリ：JQuery
+・本番サーバ環境
+  ・AWS(EC2,RDS,EIP)
+・データベース
+  ・MySQL
+・WEBサーバ
+  ・Nginx
+
 ## 設計書
 
 

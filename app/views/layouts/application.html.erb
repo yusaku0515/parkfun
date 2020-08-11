@@ -21,7 +21,7 @@
 
 
           <%= link_to(("/"), :style=>"text-decoration: none;", data: {"turbolinks" => false}) do %>
-           <span class="rogo" style="color: white; text-decoration: none; font-size: 55px; padding-bottom: 50px;">Nagano Cake</span>
+           <span class="rogo" style="color: white; text-decoration: none; font-size: 55px; padding-bottom: 50px;">ParkFun</span>
          <% end %>
 
       </div>
@@ -34,6 +34,8 @@
             <li class="user" style="margin-right: 30px">ようこそ、　<%= current_user.name %>　さん！</li>
             <li><%= link_to "アバウト", home_about_path %></li>
             <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+            <li><%= link_to "投稿一覧", posts_path %></li>
+            <li><%= link_to "投稿する", new_post_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 
 

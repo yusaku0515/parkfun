@@ -18,19 +18,19 @@
 行きたい公園について調べたい時に利用してもらう
 
 ## 使用言語
-・サーバサイド
-  ・言語：Ruby
-  ・フレームワーク：Ruby On Rails
-  ・Gem：devise
-・フロントエンド
-  ・CSSフレームワーク：BootStrap
-  ・JavaScriptライブラリ：JQuery
-・本番サーバ環境
-  ・AWS(EC2,RDS,EIP)
-・データベース
-  ・MySQL
-・WEBサーバ
-  ・Nginx
+・サーバサイド<br>
+  ・言語：Ruby<br>
+  ・フレームワーク：Ruby On Rails<br>
+  ・Gem：devise<br>
+・フロントエンド<br>
+  ・CSSフレームワーク：BootStrap<br>
+  ・JavaScriptライブラリ：JQuery<br>
+・本番サーバ環境<br>
+  ・AWS(EC2,RDS,EIP)<br>
+・データベース<br>
+  ・MySQL<br>
+・WEBサーバ<br>
+  ・Nginx<br>
 
 ## 設計書
 

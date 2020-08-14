@@ -1,33 +1,50 @@
 <div class="container">
 	<div class="row">
+		<!-- サクセスメッセージ -->
+		<% if flash[:notice] %>
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
 		<div class="col-sm-3">
 
 		</div>
-		<div class="col-xs-12 col-sm-9">
-
-			<!-- サクセスメッセージ -->
-			<% if flash[:notice] %>
-				<div class="flash">
-					<%= flash[:notice] %>
-				</div>
+		<div class="col-xs-12 col-sm-5">
+		    <%= attachment_image_tag @post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %>
+		</div>
+		<div class="col-sm-4">
+			<% if current_user.id == @post.user_id %>
+				<%= link_to "編集", edit_post_path(@post.id) %>
+				<%= link_to "削除", post_path(@post.id), method: :delete %>
 			<% end %>
-
-			<!-- 投稿一覧 -->
-	<!-- 	<div id="post_lists">
-			<%#= render partial: 'post_list', locals: { post: @posts } %>
-			</div> -->
-			<h4>投稿詳細</h4>
+			<h4>公園名</h4>
 			<%= @post.title %>
-			<% if @post.post_image.present? %>
-				<% @post.post_image.each do |image| %>
-				    <%= attachment_image_tag image, :image, :fill, 200, 200 %>
-		    	<% end %>
-			<% else %>
-				<%= image_tag 'profile1.jpg', size: '200x200' %>
+
+			<h4>ジャンル</h4>
+			<% @post_tags.each do |tag| %>
+				<%= link_to tag.tag_name, posts_path(tag_id: tag.id) %>
 			<% end %>
-			<% @post.tag each do |t| %>
-				<% link_to t.tag_name, posts_path(tag_id: t.id) %>
-			<% end %>
+
+			<h4>説明</h4>
+			<%= @post.body %>
+
+			<!-- いいね関係 -->
+			<div id="likes_buttons">
+	            <%= render 'likes/like', post: @post %>
+            </div>
+
+			<!-- コメント一覧 -->
+			<div class="comment-wrapper border-top　mb-10">
+			  <h4 class="mt-5">コメント一覧</h4>
+
+				<div id="comments_area">
+					<%= render partial: 'comments/index', locals: { comments: @comments } %>
+				</div>
+				<!-- コメント投稿フォーム -->
+			  <% if user_signed_in? %>
+			   <%= render partial: 'comments/form' %>
+			  <% end %>
+			</div>
 		</div>
 	</div>
 </div>

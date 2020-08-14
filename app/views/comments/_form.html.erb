@@ -1,0 +1,7 @@
+<%= form_with(model: [@post, @comment], id: "new_comment") do |f| %>
+	<div class="form-group row">
+		<%= f.label :comment, 'コメント' %>
+		<%= f.text_area :comment, class: "form-control", rows: 5 %>
+	</div>
+	<%= f.submit "コメントする" %>
+<% end %>

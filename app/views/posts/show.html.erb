@@ -11,6 +11,37 @@
 		</div>
 		<div class="col-xs-12 col-sm-5">
 		    <%= attachment_image_tag @post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %>
+
+			<h4>住所</h4>
+		    <%= @post.address %>
+
+		    <h4>地図</h4>
+		    <div id="map"></div>
+		    <style>
+		    	#map {
+		    		height: 300px;
+		    		width: 300px;
+		    	}
+		    </style>
+		    <script>
+		    	let map
+
+		    	function initMap(){
+		    		geocoder = new google.maps.Geocoder()
+
+		    		map = new google.maps.Map(document.getElementById('map'),{
+		    		  //lat=緯度、lng=経度
+		    		  center: {lat: 34.996556, lng:136.864722},
+		    		  zoom: 12,
+		    		});
+		    		//positionに指定した座標にピンを表示する
+		    		marker = new google.maps.Marker({
+		    		  position: {lat: 34.996556, lng:136.864722},
+		    		  map: map
+		    		});
+		    	}
+		    </script>
+		    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap" async defer></script>
 		</div>
 		<div class="col-sm-4">
 			<% if current_user.id == @post.user_id %>

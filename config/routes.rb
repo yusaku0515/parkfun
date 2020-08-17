@@ -8,10 +8,19 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   get 'users/:id/leave' => 'users#leave', as: 'users_leave'
 
-  resources :posts
+  resources :posts do
+    # いいね
+    resources :likes, only: [:create, :destroy]
+
+    # コメント
+    resources :comments, only: [:create, :destroy]
+  end
 
   get 'home/about' => 'homes#about'
   get 'home/top' => 'homes#top'
+
+  # 検索画面
+  get  'search' => 'searches#search',  as: 'search'
 
   # トップ画面
   get '/' => 'homes#top', as: 'root'

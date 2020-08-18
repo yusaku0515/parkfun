@@ -3,7 +3,7 @@
 		<div class="col-sm-3">
 			<p>タグリスト</p>
 			<% @tag_list.each do |list| %>
-				<p><%=link_to list.tag_name,blogs_path(tag_id:list.id)%><%= list.blogs.published.count %></p>
+				<p><%=link_to list.tag_name,posts_path(tag_id:list.id)%><%= list.posts.count %></p>
 			<% end %>
 		</div>
 		<div class="col-xs-12 col-sm-9">
@@ -15,25 +15,14 @@
 				</div>
 			<% end %>
 
-			<!-- 投稿一覧 -->
-	<!-- 	<div id="post_lists">
-			<%#= render partial: 'post_list', locals: { post: @posts } %>
-			</div> -->
 			<h4>投稿一覧</h4>
+
 			<% @posts.each do |post| %>
-				<%= link_to post_path(post.id) do %>
-					<%= post.title %>
-					<% if post.post_image.present? %>
-						<% post.post_image.each do |image| %>
-						    <%= attachment_image_tag image, :image, :fill, 200, 200 %>
-				    	<% end %>
-					<% else %>
-						<%= image_tag 'profile1.jpg', size: '200x200' %>
+
+					<%= link_to post_path(post.id), 'data-turbolinks': false do %>
+						<%= post.title %>
+						<%= attachment_image_tag post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %>
 					<% end %>
-					<% post.tags each do |t| %>
-						<% link_to t.tag_name, posts_path(tag_id: t.id) %>
-					<% end %>
-				<% end %>
 			<% end %>
 
 		</div>

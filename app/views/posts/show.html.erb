@@ -16,32 +16,50 @@
 		    <%= @post.address %>
 
 		    <h4>地図</h4>
-		    <div id="map"></div>
-		    <style>
-		    	#map {
-		    		height: 300px;
-		    		width: 300px;
-		    	}
-		    </style>
-		    <script>
-		    	let map
+
+		    <script type="text/javascript">
+
+		    	let map;
 
 		    	function initMap(){
-		    		geocoder = new google.maps.Geocoder()
 
-		    		map = new google.maps.Map(document.getElementById('map'),{
-		    		  //lat=緯度、lng=経度
-		    		  center: {lat: 34.996556, lng:136.864722},
-		    		  zoom: 12,
+					geocoder = new google.maps.Geocoder()
+
+					var test = {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>
+					};
+
+		    		var map = new google.maps.Map(document.getElementById('map'),{
+		    		  // コントローラーで定義した変数から緯度経度を呼び出し、マップの中心に表示
+		    		  center: test,
+		    		  zoom: 15, //地図の縮尺値
 		    		});
+
+		    		var transitLayer = new google.maps.TransitLayer();
+		    		transitLayer.setMap(map);
+
+
 		    		//positionに指定した座標にピンを表示する
-		    		marker = new google.maps.Marker({
-		    		  position: {lat: 34.996556, lng:136.864722},
+		    		var marker = new google.maps.Marker({
+		    		  // コントローラーで定義した変数から緯度経度を呼び出し、マーカーを立てる
+		    		  position: test,
 		    		  map: map
+
+		    		});
+
+		    		marker.addListener('click', function(){
+		    			infowindow.open(map, marker);
 		    		});
 		    	}
 		    </script>
-		    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap" async defer></script>
+		    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap"></script>
+		    <style type="text/css">
+		    	#map {
+		    		height: 300px;
+		    		width: 100%;
+		    	}
+		    </style>
+		    <!-- マップの表示 -->
+		    <div id="map"></div>
 		</div>
 		<div class="col-sm-4">
 			<% if current_user.id == @post.user_id %>

@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">
+		<% if flash[:notice] %> <!-- サクセスメッセージ -->
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+		<div class="col-sm-4">
+			<h4>マイページ</h4>
+			<%= link_to "編集する", edit_user_path(@user.id) %>
+			<h3>ユーザー詳細</h3>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>ユーザー名</th>
+						<td><%= @user.name %></td>
+					</tr>
+					<tr>
+						<th>メールアドレス</th>
+						<td><%= @user.email %></td>
+					</tr>
+					<tr>
+						<th>プロフィール画像</th>
+						<td><%= attachment_image_tag @user, :profile_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-7">
+			<h4>いいねした投稿</h4>
+			<% @user.liked_posts.each do |post| %>
+				<div style="text-align:center; margin-top: 15px; border-bottom: 1px solid black; padding-bottom: 15px;">
+					<%= link_to post_path(post.id) do %>
+						<%= post.title %><br>
+						<%= attachment_image_tag @post, :profile_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %><br>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

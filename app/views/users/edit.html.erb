@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="row">
+		<div class="col-lg-3"></div>
+		<div class="col-lg-6">
+			<h4>ユーザー情報編集</h4>
+
+			<%= form_for(@user) do |f| %>
+				<!-- エラー文表示 -->
+				<% if @user.errors.any? %>
+					<div id="error_explanation">
+						<h2><%= @user.errors.count %>errors prohibited this obj from being saved:</h2>
+						<ul>
+							<% @user.errors.full_messages.each do |message| %>
+								<li><%= message %></li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
+
+				<div class="row">
+					<div class="form-group">
+						<p class="col-lg-3">名前</p>
+						<div class="col-lg-9" style="padding-bottom: 10px;">
+							<%= f.text_field :name, placeholder:"名前" %><br />
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<p class="col-lg-3">メールアドレス</p>
+						<div class="col-lg-9" style="padding-bottom: 10px;">
+							<%= f.email_field :email %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<p class="col-lg-3">プロフィール画像</p>
+						<div class="col-lg-9" style="padding-bottom: 10px;">
+							<%= f.attachment_field :profile_image %>
+						</div>
+					</div>
+				</div>
+
+				<%= f.submit "変更内容を保存する" %>
+				<%= link_to "退会する", users_leave_path(current_user.id) %>
+			<% end %>
+
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>

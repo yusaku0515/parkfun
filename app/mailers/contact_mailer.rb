@@ -14,13 +14,4 @@ class ContactMailer < ApplicationMailer
       subject: 'お問い合わせ通知'
     )
   end
-  def send_when_admin_reply(user, contact) #メソッドに対して引数を設定
-    @user = user #ユーザー情報を取得
-    @answer = contact.reply_text #返信内容
-    mail(
-      from: 'system@example.com',
-      to: ENV['MAIL_ADDRESS'],
-      subject: 'お問い合わせ通知'
-    )
-  end
 end

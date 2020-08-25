@@ -1,8 +1,38 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-3">
+		<% if flash[:notice] %> <!-- サクセスメッセージ -->
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+		<div class="col-sm-12">
+			<!-- スライド -->
+			<div id="container">
+				<div id="theTarget">
+<!-- 					<div class="image1"></div>
+					<div class="image2"></div>
+					<div class="image3"></div> -->
+					<div style="background-image: url(/images/image1.jpg)"></div>
+					<div style="background-image: url(/images/image2.jpg)"></div>
+					<div style="background-image: url(/images/image3.jpg)"></div>
+				</div>
+		    </div>
+<!--   <script src="javescripts/jquery.min.js"></script>
+  <script src="javescripts/skippr.min.js"></script>
+  <script src="javescripts/application.js"></script> -->
 		</div>
-		<div class="col-sm-8">
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+			<p>タグリスト</p>
+			<% @tag_list.each do |list| %>
+				<% if list.posts.count > 0 %>
+					<p><%=link_to list.tag_name,posts_path(tag_id:list.id)%><%= list.posts.count %></p>
+				<% end %>
+			<% end %>
+		</div>
+		<div class="col-sm-9">
+			<p style="background-color: green;">投稿４つぐらい表示する</p>
 		</div>
 	</div>
 </div>

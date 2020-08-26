@@ -7,9 +7,7 @@ RSpec.describe "UserAuthentications", type: :request do
   let(:invalid_user_params) { attributes_for(:user, name: "") }
 
   describe 'POST #create' do
-    before do
-      ActionMailer::Base.deliveries.clear
-    end
+
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
         post user_registration_path, params: { user: user_params }
@@ -34,10 +32,6 @@ RSpec.describe "UserAuthentications", type: :request do
         expect(response.status).to eq 200
       end
 
-      it '認証メールが送信されないこと' do
-        post user_registration_path, params: { user: invalid_user_params }
-        expect(ActionMailer::Base.deliveries.size).to eq 0
-      end
 
       it 'createが失敗すること' do
         expect do

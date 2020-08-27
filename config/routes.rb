@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
   devise_for :users, controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations",
-    passwords: "users/passwords",
+    sessions:      'users/sessions',
+    registrations: 'users/registrations',
+    passwords:     'users/passwords',
   }
 
   resources :users, only: [:show, :edit, :update]
@@ -15,9 +20,14 @@ Rails.application.routes.draw do
     # コメント
     resources :comments, only: [:create, :destroy]
   end
-
+  # アバウト画面
   get 'home/about' => 'homes#about'
+  # トップ画面
   get 'home/top' => 'homes#top'
+
+  # お問い合わせ画面
+  get 'contacts/new'
+  post 'contacts/create'
 
   # 検索画面
   get  'search' => 'searches#search',  as: 'search'

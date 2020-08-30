@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="row">
+		<% if flash[:notice] %> <!-- サクセスメッセージ -->
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+		<div class="col-sm-6">
+			<p>今週の会員登録数</p>
+			<%= @users_week %>
+			<p>今月の会員登録数</p>
+			<%= @users_month %>
+			<p>累計会員数</p>
+			<%= @users %>
+		</div>
+		<div class="col-sm-6">
+			<p>今週の投稿数</p>
+			<%= @posts_week %>
+			<p>今月の投稿数</p>
+			<%= @posts_month %>
+			<p>累計投稿数</p>
+			<%= @posts %>
+		</div>
+	</div>
+</div>

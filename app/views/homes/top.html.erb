@@ -24,12 +24,7 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
-			<p>タグリスト</p>
-			<% @tag_list.each do |list| %>
-				<% if list.posts.count > 0 %>
-					<p><%=link_to list.tag_name,posts_path(tag_id:list.id)%><%= list.posts.count %></p>
-				<% end %>
-			<% end %>
+			<%= render 'posts/tag_list', tag_list: @tag_list %>
 		</div>
 		<div class="col-sm-9">
 			<p style="background-color: green;">投稿４つぐらい表示する</p>

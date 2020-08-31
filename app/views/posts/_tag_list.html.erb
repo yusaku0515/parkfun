@@ -1,0 +1,6 @@
+<p>タグリスト</p>
+<% tag_list.each do |list| %>
+	<% if list.posts.count > 0 %>
+		<p><%=link_to list.tag_name,posts_path(tag_id:list.id)%><%= list.posts.count %></p>
+	<% end %>
+<% end %>

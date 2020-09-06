@@ -1,0 +1,24 @@
+<div class="container">
+	<div class="row">
+		<h2>公園検索</h2>
+		<div class="text-left" style="margin: 10px;">
+		    <%= form_tag(search_path, method: "get") do %>
+		        <%= text_field_tag :keyword, params[:keyword], placeholder:"キーワードを入力すると該当する投稿が表示されます" %>
+		        <%= submit_tag 'Search' %>
+		    <% end %>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-10">
+	    <% if params[:keyword] %>
+			<h2>検索結果</h2>
+			<% @searched_posts.each do |post| %>
+				<div class="searchpost">
+					<%= link_to post_path(post.id) do %>
+				        <%= post.title %><br>
+					<% end %>
+					<%= attachment_image_tag post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %><br>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

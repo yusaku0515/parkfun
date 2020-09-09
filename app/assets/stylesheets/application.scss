@@ -35,6 +35,11 @@
 	width: 140px;
 }
 
+.showpost {
+	float: left;
+	margin: 20px 60px 0 10px;
+}
+
 #container{
   height: 500px;
   width: 100%;
@@ -53,6 +58,7 @@
 }
 
 .user {
+	color: white;
 	margin-top: 15px;
 	margin-right: 30px;
 }
@@ -61,4 +67,10 @@
 	background-color: #27ae60;
 }
 
+.notification_icon {
+	border-radius: 50%;
+}
 
+.comment_user_icon {
+	border-radius: 50%;
+}

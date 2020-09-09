@@ -2,7 +2,7 @@
 	<div>
 		<% unless comment.user.blank? %>
 			<%= link_to user_path(comment.user_id) do %>
-				<%= attachment_image_tag comment.user, :profile_image, :fill, 50, 50, class:"rounded-circle profile_image mr-3 mb-3", fallback: "profile1.jpg", size: "50x50" %>
+				<%= attachment_image_tag comment.user, :profile_image, :fill, 50, 50, class:"comment_user_icon", fallback: "profile1.jpg", size: "50x50" %>
 			<% end %>
 		<% end %>
 		<% unless comment.user.blank? %>　<!-- comment.userがnil? or empty?だったら -->

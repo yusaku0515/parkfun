@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
     attachment :post_image
 
+    # PV値測定
+    is_impressionable
+
     # geocoderを使用する為の記述 addressに住所を登録した時に緯度・経度を自動で値を入力される
     geocoded_by :address
     # 住所変更時に緯度経度も変更する

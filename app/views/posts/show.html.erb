@@ -6,19 +6,14 @@
 				<%= flash[:notice] %>
 			</div>
 		<% end %>
-		<div class="col-sm-3">
-
-		</div>
-		<div class="col-xs-12 col-sm-5">
+		<div class="col-xs-12 col-sm-6">
 		    <%= attachment_image_tag @post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %>
 
 			<h4>住所</h4>
 		    <%= @post.address %>
 
 		    <h4>地図</h4>
-
 		    <script type="text/javascript">
-
 		    	let map;
 
 		    	function initMap(){
@@ -61,7 +56,8 @@
 		    <!-- マップの表示 -->
 		    <div id="map"></div>
 		</div>
-		<div class="col-sm-4">
+
+		<div class="col-sm-6">
 			<% if current_user.id == @post.user_id %>
 				<%= link_to "編集", edit_post_path(@post.id) %>
 				<%= link_to "削除", post_path(@post.id), method: :delete %>
@@ -77,6 +73,7 @@
 			<h4>説明</h4>
 			<%= @post.body %>
 
+			観覧数：<%= number_with_delimiter(@page_views) %>
 			<!-- いいね関係 -->
 			<div id="likes_buttons">
 	            <%= render 'likes/like', post: @post %>
@@ -87,7 +84,7 @@
 			  <h4 class="mt-5">コメント一覧</h4>
 
 				<div id="comments_area">
-					<%= render partial: 'comments/index', locals: { comments: @comments } %>
+					<%= render 'comments/index', comments: @comments %>
 				</div>
 				<!-- コメント投稿フォーム -->
 			  <% if user_signed_in? %>

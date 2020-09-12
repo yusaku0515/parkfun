@@ -1,0 +1,9 @@
+<h2>検索結果</h2>
+<% searched_posts.each do |post| %>
+	<div class="searchpost">
+		<%= link_to post_path(post.id) do %>
+	        <%= post.title %><br>
+		<% end %>
+		<%= attachment_image_tag post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %><br>
+	</div>
+<% end %>

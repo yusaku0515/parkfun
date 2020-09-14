@@ -5,16 +5,12 @@ class PostsController < ApplicationController
 
   def index
     if params[:tag_id] # タグの絞り込みで関連記事を表示する場合
-      @tag_list = Tag.all.order(id: "DESC")
+      @tag_list = Tag.all
       @tag = Tag.find(params[:tag_id])
       @posts = @tag.posts.page(params[:page]).per(8)
     else # 全件表示の場合
       @tag_list = Tag.all
       @posts = Post.page(params[:page]).per(8)
-    end
-    respond_to do |format|
-      format.html
-      format.rss { render :layout => false }
     end
   end
 

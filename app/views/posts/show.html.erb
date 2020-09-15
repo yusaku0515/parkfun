@@ -71,9 +71,11 @@
 			<% end %>
 
 			<h4>説明</h4>
-			<%= @post.body %>
+			<%= @post.body %><br>
+<h4>観覧数</h4>
+			<%= number_with_delimiter(@page_views) %>人が観覧しました
 
-			観覧数：<%= number_with_delimiter(@page_views) %>
+			<h4>いいね</h4>
 			<!-- いいね関係 -->
 			<div id="likes_buttons">
 	            <%= render 'likes/like', post: @post %>

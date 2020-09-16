@@ -39,7 +39,14 @@
             <li><%= link_to "公園検索", search_path, :style=>"color: white;" %></li>
             <li><%= link_to "投稿一覧", posts_path, :style=>"color: white;" %></li>
             <li><%= link_to "投稿する", new_post_path, :style=>"color: white;" %></li>
-            <li><%= link_to "通知", notifications_path, :style=>"color: white;" %></li>
+            <% if unchecked_notifications.any? %>
+              <li><%= link_to notifications_path do %>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color: red;">通知あり</span>
+              </li>
+              <% end %>
+            <% else %>
+              <li><%= link_to "通知なし", notifications_path %></li>
+            <% end %>
             <li><%= link_to "お問い合わせ", contacts_new_path, :style=>"color: white;" %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, :style=>"color: white;" %></li>
           <% elsif admin_signed_in? %><!-- 管理者ログイン後 -->

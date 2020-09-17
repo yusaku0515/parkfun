@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-4" style="background-color: #eeeeee;">
+        <h2><%= @user.name %>の会員詳細</h2>
+      </div>
+
+
+        <div class="form-group" style="margin-top: 30px;">
+            <p class="col-xs-2">顧客ID</p>
+            <%= @user.id %>
+            <% if @user.user_status == true %>
+            有効会員
+            <% elsif @user.user_status == false %>
+            退会済み
+            <% end %>
+        </div>
+
+        <div class="form-group">
+            <p class="col-xs-2">氏名</p>
+            <%= @user.name %>
+        </div>
+
+        <div class="form-group">
+            <p class="col-xs-2">メールアドレス</p>
+            <%= @user.email %>
+        </div>
+
+        <div class="form-group">
+            <%= link_to "編集する", edit_admins_user_path(@user.id), class: "btn btn-primary" %>
+        </div>
+
+    投稿したものを表示
+
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="container">
+	<div class="row">
+		<!-- サクセスメッセージ -->
+		<% if flash[:notice] %>
+			<div class="flash">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+		<div class="col-xs-12 col-sm-6">
+		    <%= attachment_image_tag @post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %>
+
+			<h4>住所</h4>
+		    <%= @post.address %>
+
+		    <h4>地図</h4>
+		    <script type="text/javascript">
+		    	let map;
+
+		    	function initMap(){
+
+					geocoder = new google.maps.Geocoder()
+
+					var test = {lat: <%= @post.latitude %>, lng: <%= @post.longitude %>
+					};
+
+		    		var map = new google.maps.Map(document.getElementById('map'),{
+		    		  // コントローラーで定義した変数から緯度経度を呼び出し、マップの中心に表示
+		    		  center: test,
+		    		  zoom: 15, //地図の縮尺値
+		    		});
+
+		    		var transitLayer = new google.maps.TransitLayer();
+		    		transitLayer.setMap(map);
+
+
+		    		//positionに指定した座標にピンを表示する
+		    		var marker = new google.maps.Marker({
+		    		  // コントローラーで定義した変数から緯度経度を呼び出し、マーカーを立てる
+		    		  position: test,
+		    		  map: map
+
+		    		});
+
+		    		marker.addListener('click', function(){
+		    			infowindow.open(map, marker);
+		    		});
+		    	}
+		    </script>
+		    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['YOUR_API_KEY'] %>&callback=initMap"></script>
+		    <style type="text/css">
+		    	#map {
+		    		height: 300px;
+		    		width: 100%;
+		    	}
+		    </style>
+		    <!-- マップの表示 -->
+		    <div id="map"></div>
+		</div>
+
+		<div class="col-sm-6">
+			<% if current_user.id == @post.user_id %>
+				<%= link_to "編集", edit_post_path(@post.id) %>
+				<%= link_to "削除", post_path(@post.id), method: :delete %>
+			<% end %>
+			<h4>公園名</h4>
+			<%= @post.title %>
+
+			<h4>ジャンル</h4>
+			<% @post_tags.each do |tag| %>
+				<%= link_to tag.tag_name, posts_path(tag_id: tag.id) %>
+			<% end %>
+
+			<h4>説明</h4>
+			<%= @post.body %><br>
+<h4>観覧数</h4>
+			<%= number_with_delimiter(@page_views) %>人が観覧しました
+
+			<h4>いいね</h4>
+			<!-- いいね関係 -->
+			<div id="likes_buttons">
+	            <%= render 'likes/like', post: @post %>
+            </div>
+
+			<!-- コメント一覧 -->
+			<div class="comment-wrapper border-top　mb-10">
+			  <h4 class="mt-5">コメント一覧</h4>
+
+				<div id="comments_area">
+					<%= render 'comments/index', comments: @comments %>
+				</div>
+				<!-- コメント投稿フォーム -->
+			  <% if user_signed_in? %>
+			   <%= render partial: 'comments/form' %>
+			  <% end %>
+			</div>
+		</div>
+	</div>
+</div>

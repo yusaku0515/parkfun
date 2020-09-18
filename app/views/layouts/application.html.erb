@@ -4,12 +4,67 @@
     <title>Parkfun</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <%= javascript_include_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+          <span class="sr-only">メニュー</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <% if admin_signed_in? %>
+          <%= link_to( admins_homes_top_path, :style=>"text-decoration: none;", data: {"turbolinks" => false}) do %>
+            <span class="rogo">ParkFun</span>
+         <% end %>
+        <% else %>
+          <%= link_to(("/"), :style=>"text-decoration: none;", data: {"turbolinks" => false}) do %>
+            <span class="rogo">ParkFun</span>
+          <% end %>
+        <% end %>
+      </div>
+      <nav id="gnavi" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right" style="font-size: 16px;">
+          <% if user_signed_in? %><!-- 会員ログイン後 -->
+            <li class="user">ようこそ、　<%= current_user.name %>　さん！</li>
+            <li><%= link_to "マイページ", user_path(current_user.id), :style=>"color: white;" %></li>
+            <li><%= link_to "アバウト", home_about_path, :style=>"color: white;" %></li>
+            <li><%= link_to "公園検索", search_path, :style=>"color: white;" %></li>
+            <li><%= link_to "投稿一覧", posts_path, :style=>"color: white;" %></li>
+            <li><%= link_to "投稿する", new_post_path, :style=>"color: white;" %></li>
+            <% if unchecked_notifications.any? %>
+              <li><%= link_to notifications_path do %>
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color: red;">通知あり</span>
+              </li>
+              <% end %>
+            <% else %>
+              <li><%= link_to "通知なし", notifications_path, :style=>"color: white;" %></li>
+            <% end %>
+            <li><%= link_to "お問い合わせ", contacts_new_path, :style=>"color: white;" %></li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, :style=>"color: white;" %></li>
+          <% elsif admin_signed_in? %><!-- 管理者ログイン後 -->
+            <li class="user">管理者ログイン中</li>
+            <li><%= link_to "投稿一覧", admins_posts_path, :style=>"color: white;" %></li>
+            <li><%= link_to "会員一覧", admins_users_path, :style=>"color: white;" %></li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, :style=>"color: white;" %></li>
+          <% else %><!-- 非ログイン -->
+            <li><%= link_to "アバウト", home_about_path, :style=>"color: white;" %></li>
+            <li><%= link_to "新規登録", new_user_registration_path, :style=>"color: white;", data: {"turbolinks" => false} %></li>
+            <li><%= link_to "ログイン", new_user_session_path, :style=>"color: white;" %></li>
+            <li><%= link_to "管理者用ログイン", new_admin_session_path, :style=>"color: white;" %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </nav>
+
     <%= yield %>
+
   </body>
 </html>

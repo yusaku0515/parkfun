@@ -1,0 +1,7 @@
+<%= form_with(model: [@post, @comment], id: "new_comment") do |f| %>
+	<div class="form-group row">
+		<%= f.label :comment, 'コメント（利用した感想、利用時の注意点等）' %>
+		<%= f.text_area :comment, class: "form-control", placeholder:"例）手洗い場が２カ所あります、土日祝は混雑しています" %>
+	</div>
+	<%= f.submit "コメントする" %>
+<% end %>

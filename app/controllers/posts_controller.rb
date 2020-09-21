@@ -10,7 +10,7 @@ class PostsController < ApplicationController
       @posts = @tag.posts.page(params[:page]).per(8)
     else # 全件表示の場合
       @tag_list = Tag.all
-      @posts = Post.page(params[:page]).per(8)
+      @posts = Post.all.page(params[:page]).per(8)
     end
   end
 

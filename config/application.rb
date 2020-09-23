@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Parkfun
   class Application < Rails::Application
+  	config.paths.add 'lib', eager_load: true  # バッチ処理で作成したプログラムを読み込まれるために記述
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
@@ -15,5 +16,7 @@ module Parkfun
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.i18n.default_locale = :ja
   end
 end

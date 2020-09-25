@@ -25,6 +25,10 @@ class Post < ApplicationRecord
 
     has_many :notifications, dependent: :destroy
 
+    # バリデーション
+    validates :title, presence: true
+    validates :body, presence: true
+
     # 検索関係
     def self.search(keyword)
         where(['title LIKE ? OR body LIKE ?', "%#{keyword}%", "%#{keyword}%"])

@@ -1,0 +1,8 @@
+<% post.each do |post| %>
+	<div class="indexpost">
+		<%= link_to post_path(post.id), 'data-turbolinks': false do %>
+			<%= attachment_image_tag post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %><br>
+			<td><%= link_to post.title, post_path(post.id) %></td>
+		<% end %>
+	</div>
+<% end %>

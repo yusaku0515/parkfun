@@ -8,21 +8,34 @@
 		<div class="col-sm-12">
 			<!-- スライド -->
 			<div id="container">
-				<div id="theTarget">
-	                <div class="image1"></div>
-	                <div class="image2"></div>
-	                <div class="image3"></div>
-	                <div class="image4"></div>
-				</div>
+					<div id="theTarget">
+		                <div class="image1"></div>
+		                <div class="image2"></div>
+		                <div class="image3"></div>
+		                <div class="image4"></div>
+					</div>
 		    </div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3">
-			<%= render 'posts/tag_list', tag_list: @tag_list %>
-		</div>
-		<div class="col-sm-9">
-			<p style="background-color: green;">投稿４つぐらい表示する</p>
+		<div class="top">
+			<div class="col-sm-3">
+				<%= render 'posts/tag_list', tag_list: @tag_list %>
+			</div>
+			<div class="col-sm-9">
+				<h3>おすすめ</h3>
+				<% @posts.each do |post| %>
+					<div class="toppost">
+						<%= link_to post_path(post.id), 'data-turbolinks': false do %>
+							<%= attachment_image_tag post, :post_image, :fill, 200, 200, fallback: "profile1.jpg", size: "200x200" %><br>
+							<td><%= link_to post.title, post_path(post.id) %></td>
+						<% end %>
+					</div>
+				<% end %>
+				<div class="text-right" style="margin-bottom: 100px;">
+					<%= link_to "もっと見る>>", posts_path %>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

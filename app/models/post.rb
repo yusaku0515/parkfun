@@ -4,6 +4,9 @@ class Post < ApplicationRecord
     # PV値測定
     is_impressionable
 
+    # ページネーション（何個ずつ表示させるか）
+    paginates_per 8
+
     # geocoderを使用する為の記述 addressに住所を登録した時に緯度・経度を自動で値を入力される
     geocoded_by :address
     # 住所変更時に緯度経度も変更する
@@ -21,6 +24,10 @@ class Post < ApplicationRecord
     has_many :comments, dependent: :destroy
 
     has_many :notifications, dependent: :destroy
+
+    # バリデーション
+    validates :title, presence: true
+    validates :body, presence: true
 
     # 検索関係
     def self.search(keyword)
